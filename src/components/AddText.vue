@@ -11,6 +11,14 @@ const props = defineProps({
   arr: {
     default: [],
   },
+  // 字体颜色(R,G,B)
+  color: {
+    default: "255, 192, 203",
+  },
+  // 字体大小
+  fontsize: {
+    default: "14px",
+  },
 });
 
 const INTERVAL = 50; //每一行显示间隔
@@ -25,7 +33,11 @@ const getStyle = (item) => {
   if (item.percentage > 100) {
     percentage = 100;
   }
-  return { "--percentage": `${percentage}%` };
+  return {
+    "--percentage": `${percentage}%`,
+    fontSize: props.fontsize,
+    backgroundImage: `linear-gradient(75deg, rgba(${props.color}, 1) 0%, rgba(${props.color}, 1) 33.33%, rgba(${props.color}, 0) 66.67%, rgba(${props.color}, 0) 100%)`,
+  };
 };
 
 const enterFrame = () => {
@@ -57,7 +69,6 @@ p {
   width: 150px;
 
   letter-spacing: -0.3px;
-  background-image: linear-gradient(75deg, rgba(255, 192, 203, 1) 0%, rgba(255, 192, 203, 1) 33.33%, rgba(255, 192, 203, 0) 66.67%, rgba(255, 192, 203, 0) 100%);
   background-size: 300% 100%;
   background-position-x: calc(100% - var(--percentage));
   background-clip: text;
